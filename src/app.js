@@ -1,13 +1,17 @@
 import express from "express";
-import { connectMongoDB } from "./config/mongoDB.config.js";
-import animalsRoutes from "./routes/animals.routes.js"
+import productsRoutes from "./router/products.routes.js";
+import cartsRoutes from "./router/carts.routes.js";
+import { connectMongoDB } from "./config/mongoDb.config.js";
+
 connectMongoDB();
+const PORT = 8080;
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/animals",animalsRoutes)   
+app.use("/api/products", productsRoutes);
+app.use("/api/carts", cartsRoutes);
 
-app.listen(8080,()=>{
-    console.log("Server on port 8080")
-})
+app.listen(PORT, () => {
+    console.log(`Server on port ${PORT}`);
+});
